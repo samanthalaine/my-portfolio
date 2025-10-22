@@ -4,28 +4,52 @@ import {
   Send,
   Github,
   Twitter,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+} from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useToast } from "@/hooks/use-toast"
+import { useState } from "react"
+import emailjs from '@emailjs/browser'
+
 
 export const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  })
+
+
+  // const SERVICE_ID = "service_vbxjytq"
+  // const TEMPLATE_ID = "template_yj394nf"
+  // const PUBLIC_KEY = "hnkrSwep7gi-dinQ5"
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setIsSubmitting(true)
+    emailjs.sendForm(
+      import.meta.env.VITE_SERVICE_ID, 
+      import.meta.env.VITE_TEMPLATE_ID, 
+      e.target, 
+      import.meta.env.VITE_PUBLIC_KEY).then(()=> {
 
-    setIsSubmitting(true);
-
-    setTimeout(() => {
+      setTimeout(() => {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        })
+        setIsSubmitting(false)
+      }, 1500)
+      setFormData({ name: "", email: "", message: "" })
+    }).catch(()=> {
       toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setIsSubmitting(false);
-    }, 1500);
-  };
+        title: "Oops",
+        description: "Something went wrong. Please try again"
+      })
+    })
+  }
+
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
@@ -98,8 +122,10 @@ export const ContactSection = () => {
                   id="name"
                   name="name"
                   required
+                  value={formData.name}
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
                   placeholder="Name..."
+                  onChange={(e)=>setFormData({...formData, name: e.target.value})}
                 />
               </div>
 
@@ -116,8 +142,10 @@ export const ContactSection = () => {
                   id="email"
                   name="email"
                   required
+                  value={formData.email}
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
                   placeholder="name@email.com"
+                  onChange={(e)=>setFormData({...formData, email: e.target.value})}
                 />
               </div>
 
@@ -133,8 +161,10 @@ export const ContactSection = () => {
                   id="message"
                   name="message"
                   required
+                  value={formData.message}
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
+                  onChange={(e)=>setFormData({...formData, message: e.target.value})}
                 />
               </div>
 
