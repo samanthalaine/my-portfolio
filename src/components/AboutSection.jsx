@@ -1,4 +1,4 @@
-import { Code, User } from "lucide-react"
+import { Code, User, Component } from "lucide-react"
 
 export const AboutSection = () => {
   return (
@@ -12,7 +12,7 @@ export const AboutSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold">
-              Passionate Software Developer
+              Software Developer
             </h3>
 
             <p className="text-muted-foreground">
@@ -22,7 +22,7 @@ export const AboutSection = () => {
             </p>
 
             <p className="text-muted-foreground">
-              Passionate about writing efficient, well-documented code that enhances user experience, accessibility, and reliability.
+              Skilled in writing clean, testable code and working closely with distributed teams to design and deliver scalable UI solutions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
@@ -58,13 +58,12 @@ export const AboutSection = () => {
             <div className="gradient-border p-6 card-hover">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-primary/10">
-                  <User className="h-6 w-6 text-primary" />
+                  <Component className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">UI/UX Design</h4>
+                  <h4 className="font-semibold text-lg">Building Accessible Component Libraries</h4>
                   <p className="text-muted-foreground">
-                    Designing intuitive user interfaces and seamless user
-                    experiences.
+                    Writing clean, semantic HTML/CSS and integrating modern state management to create intuitive, accessible, and performance-optimized interfaces.
                   </p>
                 </div>
               </div>
